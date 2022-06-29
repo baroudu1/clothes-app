@@ -12,9 +12,9 @@ const Navigation = () => {
                     <MrbooLogo className='logo' />
                 </Link>
                 <div className='nav-links-container'>
-                    <Link to='/shop' className='nav-link'>Shop</Link>
-                    <Link to='/contact' className='nav-link'>Contact</Link>
-                    <Link to='/sign-in' className='nav-link'>Sign in</Link>
+                    <Link to='/shop' className='nav-link'>SHOP</Link>
+                    <Link to='/contact' className='nav-link'>CONTACT</Link>
+                    <Link to='/auth' className='nav-link'>SIGN IN</Link>
                 </div>
             </div>
             <Outlet />

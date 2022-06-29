@@ -11,6 +11,10 @@ const FormInput = React.lazy(() =>
   import("../../components/form-input/form-input.component")
 );
 
+const Button = React.lazy(() =>
+  import("../../components/button/button.component")
+);
+
 const defaultFormFields = {
   displayName: "",
   email: "",
@@ -63,7 +67,7 @@ const SignUpForm = () => {
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
-      <span>Sign Up with your email password</span>
+      <span>Sign Up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display Name"
@@ -101,7 +105,7 @@ const SignUpForm = () => {
           value={confirmPassword}
           required={true}
         />
-        <button type="submit">Sign Up</button>
+        <Button  type="submit">Sign Up</Button>
       </form>
     </div>
   );

@@ -2,18 +2,26 @@ import React from "react";
 // import { useEffect } from "react";
 // import { getRedirectResult } from "firebase/auth";
 
-import {
-  // auth,
-  signInWithGooglePopup,
-  // signInWithGoogleRedirect,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+import './authentication.style.scss';
+
+// import {
+//   // auth,
+//   signInWithGooglePopup,
+//   // signInWithGoogleRedirect,
+//   signInEmailAndPassword,
+//   createUserDocumentFromAuth,
+// } from "../../utils/firebase/firebase.utils";
 
 const SignUpForm = React.lazy(() =>
   import("../../components/sign-up-form/sign-up-form.component")
 );
 
-const SignIn = () => {
+const SignInForm = React.lazy(() =>
+  import("../../components/sign-in-form/sign-in-form.component")
+);
+
+
+const Authentication = () => {
   // useEffect(() => {
   //   async function fetchData() {
   //     // You can await here
@@ -29,24 +37,24 @@ const SignIn = () => {
   //   }
   //   fetchData();
   // }, []);
-  const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    // console.log(user)
-    const userDocRef = await createUserDocumentFromAuth(user);
-    console.log(userDocRef);
-  };
+  // const logGoogleUser = async () => {
+  //   const { user } = await signInWithGooglePopup();
+  //   // console.log(user)
+  //   const userDocRef = await createUserDocumentFromAuth(user);
+  //   console.log(userDocRef);
+  // };
   // const logGoogleRedirectUser = async () => {
   //   const { user } = await signInWithGoogleRedirect();
   //   console.log(user);
 
   // };
   return (
-    <div>
-      <h1>Sign In</h1>
-      <button onClick={logGoogleUser}>Sign in with Google PopUp</button>
+    <div className="authentication-container">
+      {/* <Button buttonType='google' onClick={logGoogleUser}>Sign in with Google</Button> */}
       {/* <button onClick={signInWithGoogleRedirect}>Sign in with Google Redirect</button> */}
+      <SignInForm />
       <SignUpForm />
     </div>
   );
 };
-export default SignIn;
+export default Authentication;
