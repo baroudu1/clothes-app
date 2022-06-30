@@ -1,10 +1,16 @@
 
 import Category from "../category-item/category.component";
+
+import MyList from '../../services/categories-list';
+
 import './categories.style.scss';
 
 
 
-const Categories = ({ categories }) => {
+const Categories = () => {
+    
+    const categories = MyList.categories;
+
     return (
         <div className="categories-container">
             {categories.map(category => (

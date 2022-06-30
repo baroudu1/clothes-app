@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import Swal from "sweetalert2";
+import React, { useState, useContext } from "react";
+// import { UserContext } from "../../contexts/user.contexts";
 
 import "./sign-in-form.style.scss";
 
@@ -27,6 +29,8 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  // const { setCurrentUser } = useContext(UserContext);
+
   const restformFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -39,24 +43,37 @@ const SignInForm = () => {
     // console.log(formFields);
     try {
       const { user } = await signInEmailAndPassword(email, password);
-      console.log(user);
+      // console.log(user);
+      // setCurrentUser(user);
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "You have logged successfully",
+      });
+      restformFields();
     } catch (error) {
-      let errorMsg = error.message
-        .split(":")[1]
-        .replace("auth/", "")
-        .replaceAll("-", " ");
-      alert(errorMsg);
+      let errorMsg =
+        error.message +
+        ":".split(":")[1].replace("auth/", "").replaceAll("-", " ");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: errorMsg,
+      });
       return;
     }
-
-    restformFields();
   };
 
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
     // console.log(user)
-    const userDocRef = await createUserDocumentFromAuth(user);
-    console.log(userDocRef);
+    // setCurrentUser(user);
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: "You have logged successfully",
+    });
+    await createUserDocumentFromAuth(user);
   };
 
   return (

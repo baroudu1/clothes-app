@@ -1,11 +1,15 @@
-import './sign-up-form.style.scss';
+import Swal from "sweetalert2";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
+
+// import { UserContext } from "../../contexts/user.context";
+
+import "./sign-up-form.style.scss";
 
 const FormInput = React.lazy(() =>
   import("../../components/form-input/form-input.component")
@@ -26,6 +30,8 @@ const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
+  // const { setCurrentUser } = useContext(UserContext);
+
   const restformFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -39,7 +45,11 @@ const SignUpForm = () => {
     e.preventDefault();
     // console.log(formFields);
     if (password !== confirmPassword) {
-      alert("Passwords don't match");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Passwords don't match",
+      });
       return;
     }
     try {
@@ -48,19 +58,26 @@ const SignUpForm = () => {
         password
       );
       //   console.log(user);
+      // setCurrentUser(user);
 
-      const userDocRef = await createUserDocumentFromAuth(user, {
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "User created successfully",
+      });
+      restformFields();
+      await createUserDocumentFromAuth(user, {
         displayName,
       });
-      //   console.log(userDocRef);
-      restformFields();
-      alert("User created successfully");
     } catch (error) {
-      let errorMsg = error.message
-        .split(":")[1]
-        .replace("auth/", "")
-        .replaceAll("-", " ");
-      alert(errorMsg);
+      let errorMsg =
+        error.message +
+        ":".split(":")[1].replace("auth/", "").replaceAll("-", " ");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: errorMsg,
+      });
     }
   };
 
@@ -105,7 +122,7 @@ const SignUpForm = () => {
           value={confirmPassword}
           required={true}
         />
-        <Button  type="submit">Sign Up</Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );

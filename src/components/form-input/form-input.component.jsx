@@ -14,7 +14,6 @@ const FormInput = ({
     <div className="group">
       <input
         className="form-input"
-        id={name}
         name={name}
         type={type}
         value={value}
