@@ -1,22 +1,19 @@
+import { useContext } from "react";
+import { CategoriesContext } from "../../contexts/categories.context";
 
 import Category from "../category-item/category.component";
 
-import MyList from '../../services/categories-list';
-
-import './categories.style.scss';
-
-
+import "./categories.style.scss";
 
 const Categories = () => {
-    
-    const categories = MyList.categories;
+  const { categories } = useContext(CategoriesContext);
 
-    return (
-        <div className="categories-container">
-            {categories.map(category => (
-                <Category key={category.id} category={category} />
-            ))}
-        </div>
-    );
-}
+  return (
+    <div className="categories-container">
+      {categories.map((category) => (
+        <Category key={category.id} category={category} />
+      ))}
+    </div>
+  );
+};
 export default Categories;

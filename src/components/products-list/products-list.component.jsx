@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
-import { ProductsContext } from "../../contexts/products.context";
+
+import { CategoriesContext } from "../../contexts/categories.context";
+
 
 import "./products-list.style.scss";
 
@@ -8,10 +10,10 @@ const ProductCard = React.lazy(() =>
 );
 
 const ProductsList = () => {
-  const { products } = useContext(ProductsContext);
+  const { categories } = useContext(CategoriesContext);
   return (
     <div className="products-list-container">
-      {products.map((category) => (
+      {categories.map((category) => (
         <div key={category.id}>
           <h2>{category.title}</h2>
           <div className="products-container">
