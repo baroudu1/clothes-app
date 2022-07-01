@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { CartContext } from "../../contexts/cart.context";
 
@@ -14,16 +15,21 @@ const CartItem = React.lazy(() =>
 
 const CartDropdown = () => {
   const { cartItems } = useContext(CartContext);
+  const navigate = useNavigate();
+  const handleCheckout = () => {
+    navigate("/checkout");
+  };
 
   return (
     <div className="cart-dropdown-container">
       <div className="cart-items">
         {cartItems.length > 0 &&
           cartItems.map((item) => <CartItem key={item.id} cartItem={item} />)}
-        {cartItems.length === 0 && <div className="empty-message">Your cart is empty</div>}
+        {cartItems.length === 0 && (
+          <div className="empty-message">Your cart is empty</div>
+        )}
       </div>
-
-      <Button>Checkout</Button>
+      <Button onClick={handleCheckout}>Checkout</Button>
     </div>
   );
 };

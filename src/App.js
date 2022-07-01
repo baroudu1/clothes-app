@@ -9,6 +9,7 @@ const Home = React.lazy(() => import("./routes/home/home.page"));
 const Navigation = React.lazy(() =>import("./routes/navigation/navigation.page"));
 const Authentication = React.lazy(() =>import("./routes/authentication/authentication.page"));
 const Shop = React.lazy(() =>import("./routes/shop/shop.page"));
+const Checkout = React.lazy(() => import("./routes/checkout/checkout.page"));
 
 //
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path="shop" element={<Shop />} />
             <Route path="auth" element={<Authentication />} />
+            <Route path="checkout" element={<Checkout />} />
           </Route>
         </Routes>
       </Suspense>

@@ -19,14 +19,12 @@ const CartDropdown = React.lazy(() =>
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { isCartOpen , cartItems } = useContext(CartContext);
+  const { isCartOpen, cartItemsCount } = useContext(CartContext);
 
   const handleSignOut = async () => {
     await signOutUser();
     // setCurrentUser(null);
   };
-
-  const countTot = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <Fragment>
@@ -52,7 +50,7 @@ const Navigation = () => {
             </Link>
           )}
           <Link to="#" className="nav-link">
-            <CartIcon count={countTot} />
+            <CartIcon count={cartItemsCount} />
           </Link>
           {isCartOpen && <CartDropdown />}
         </div>

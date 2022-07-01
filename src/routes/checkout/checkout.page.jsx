@@ -1,7 +1,14 @@
+import React from "react";
+import "./checkout.style.scss";
+
+const CheckoutList = React.lazy(() =>
+  import("../../components/checkout-list/checkout-list.component")
+);
+
 const CheckOut = () => {
   return (
-    <div>
-      <h1>Checkout</h1>
+    <div className="checkout">
+      <CheckoutList />
     </div>
   );
 };
