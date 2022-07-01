@@ -3,6 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { UserContext } from "../../contexts/user.context";
+import { CartContext } from "../../contexts/cart.context";
 
 import { ReactComponent as MrbooLogo } from "../../assets/logo/mrboo-logo.svg";
 
@@ -12,13 +13,20 @@ const CartIcon = React.lazy(() =>
   import("../../components/cart-icon/cart-icon.component")
 );
 
+const CartDropdown = React.lazy(() =>
+  import("../../components/cart-dropdown/cart-dropdown.component")
+);
+
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen , cartItems } = useContext(CartContext);
 
   const handleSignOut = async () => {
     await signOutUser();
     // setCurrentUser(null);
   };
+
+  const countTot = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <Fragment>
@@ -44,8 +52,9 @@ const Navigation = () => {
             </Link>
           )}
           <Link to="#" className="nav-link">
-            <CartIcon count={0} />
+            <CartIcon count={countTot} />
           </Link>
+          {isCartOpen && <CartDropdown />}
         </div>
       </div>
       <Outlet />
