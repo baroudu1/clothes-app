@@ -2,6 +2,8 @@ import Swal from "sweetalert2";
 
 import React, { useState, useContext } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -29,6 +31,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const navigate = useNavigate();
 
   // const { setCurrentUser } = useContext(UserContext);
 
@@ -60,19 +63,21 @@ const SignUpForm = () => {
       //   console.log(user);
       // setCurrentUser(user);
 
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: "User created successfully",
-      });
+      // Swal.fire({
+      //   icon: "success",
+      //   title: "Success",
+      //   text: "User created successfully",
+      // });
+      navigate("/");
       restformFields();
       await createUserDocumentFromAuth(user, {
         displayName,
       });
     } catch (error) {
-      let errorMsg =
-        error.message +
-        ":".split(":")[1].replace("auth/", "").replaceAll("-", " ");
+      let errorMsg = error.message
+        .split(":")[1]
+        .replace("auth/", "")
+        .replaceAll("-", " ");
       Swal.fire({
         icon: "error",
         title: "Oops...",

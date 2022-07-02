@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 // import { UserContext } from "../../contexts/user.contexts";
 
 import "./sign-in-form.style.scss";
@@ -28,6 +29,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const navigate = useNavigate();
 
   // const { setCurrentUser } = useContext(UserContext);
 
@@ -42,19 +44,20 @@ const SignInForm = () => {
     e.preventDefault();
     // console.log(formFields);
     try {
-      const { user } = await signInEmailAndPassword(email, password);
+      await signInEmailAndPassword(email, password);
       // console.log(user);
       // setCurrentUser(user);
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: "You have logged successfully",
-      });
+      // Swal.fire({
+      //   icon: "success",
+      //   title: "Success",
+      //   text: "You have logged successfully",
+      // });
+      navigate("/");
       restformFields();
+
     } catch (error) {
       let errorMsg =
-        error.message +
-        ":".split(":")[1].replace("auth/", "").replaceAll("-", " ");
+        error.message.split(":")[1].replace("auth/", "").replaceAll("-", " ");
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -68,11 +71,12 @@ const SignInForm = () => {
     const { user } = await signInWithGooglePopup();
     // console.log(user)
     // setCurrentUser(user);
-    Swal.fire({
-      icon: "success",
-      title: "Success",
-      text: "You have logged successfully",
-    });
+    // Swal.fire({
+    //   icon: "success",
+    //   title: "Success",
+    //   text: "You have logged successfully",
+    // });
+    navigate("/");
     await createUserDocumentFromAuth(user);
   };
 
