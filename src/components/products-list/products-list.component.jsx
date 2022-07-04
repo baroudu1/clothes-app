@@ -1,7 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-import { CategoriesContext } from "../../contexts/categories.context";
+// import { CategoriesContext } from "../../contexts/categories.context";\\
+
+
+import { useSelector } from "react-redux";
+import { selectCategories } from "../../store/categories/categories.selector";
 
 import "./products-list.style.scss";
 
@@ -10,7 +14,7 @@ const ProductCard = React.lazy(() =>
 );
 
 const ProductsList = () => {
-  const { categories } = useContext(CategoriesContext);
+  const categories = useSelector(selectCategories);
 
   return (
     <div className="products-list-container">

@@ -1,7 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { CategoriesContext } from "../../contexts/categories.context";
+// import { CategoriesContext } from "../../contexts/categories.context";
+
+
+import { useSelector } from "react-redux";
+import { selectCategories } from "../../store/categories/categories.selector";
 
 import "./category-preview.style.scss";
 
@@ -10,7 +14,7 @@ const ProductCard = React.lazy(() =>
 );
 
 const CategoryPreview = () => {
-  const { categories } = useContext(CategoriesContext);
+  const  categories  = useSelector(selectCategories);
   const { category } = useParams();
   const [categoryItem, setCategoryItem] = useState(null);
   useEffect(() => {

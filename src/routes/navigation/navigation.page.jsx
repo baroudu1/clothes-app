@@ -1,8 +1,11 @@
 import React, { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector";
+
 import { signOutUser } from "../../utils/firebase/firebase.utils";
-import { UserContext } from "../../contexts/user.context";
+// import { UserContext } from "../../contexts/user.context";
 import { CartContext } from "../../contexts/cart.context";
 
 import { ReactComponent as MrbooLogo } from "../../assets/logo/mrboo-logo.svg";
@@ -18,7 +21,8 @@ const CartDropdown = React.lazy(() =>
 );
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  const  currentUser  = useSelector(selectCurrentUser);
+  // const { currentUser } = useContext(UserContext);
   const { isCartOpen, cartItemsCount } = useContext(CartContext);
 
   const handleSignOut = async () => {

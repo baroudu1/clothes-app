@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect, useReducer } from "react";
 
 export const CartContext = createContext({
   isCartOpen: false,
@@ -33,6 +33,53 @@ const removeItemFromCartHelper = (cartItems, cartItemToRemove) => {
   return cItems.filter((cartItem) => cartItem.quantity > 0);
 };
 
+///////////////////////////////
+export const CART_ACTIONS_TYPES = {
+  SET_IS_CART_OPEN: "SET_IS_CART_OPEN",
+  ADD_ITEM_TO_CART: "ADD_ITEM_TO_CART",
+  REMOVE_ITEM_FROM_CART: "REMOVE_ITEM_FROM_CART",
+  DELETE_ITEM_FROM_CART: "DELETE_ITEM_FROM_CART",
+};
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case CART_ACTIONS_TYPES.SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: payload,
+      };
+    case CART_ACTIONS_TYPES.ADD_ITEM_TO_CART:
+      return {
+        ...state,
+        cartItems: addItemToCartHelper(state.cartItems, payload),
+      };
+    case CART_ACTIONS_TYPES.REMOVE_ITEM_FROM_CART:
+      return {
+        ...state,
+        cartItems: removeItemFromCartHelper(state.cartItems, payload),
+      };
+    case CART_ACTIONS_TYPES.DELETE_ITEM_FROM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          (cartItem) => cartItem.id !== payload
+        ),
+      };
+    default:
+      throw new Error(`Unhandled action type: ${type}`);
+  }
+};
+
+const INITIAL_STATE = {
+  isCartOpen: false,
+  cartItems: [],
+  cartItemsCount: 0,
+  cartTotal: 0,
+};
+
+///////////////////////////////
+
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -51,7 +98,7 @@ export const CartProvider = ({ children }) => {
       0
     );
     setCartTotal(cartTotal);
-  });
+  }, [cartItems]);
 
   const removeItemFromCart = (cartItemToRemove) => {
     setCartItems(removeItemFromCartHelper(cartItems, cartItemToRemove));

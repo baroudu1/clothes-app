@@ -4,9 +4,12 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { UserProvider } from "./contexts/user.context";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+
+// import { UserProvider } from "./contexts/user.context";
 import { CartProvider } from "./contexts/cart.context";
-import { CategoriesProvider } from "./contexts/categories.context";
+// import { CategoriesProvider } from "./contexts/categories.context";
 
 import "./index.scss";
 import "./app.scss";
@@ -14,13 +17,15 @@ import "./app.scss";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <UserProvider>
-      <CategoriesProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </CategoriesProvider>
-    </UserProvider>
+    <Provider store={store}>
+      {/* <UserProvider> */}
+        {/* <CategoriesProvider> */}
+          <CartProvider>
+            <App />
+          </CartProvider>
+        {/* </CategoriesProvider> */}
+      {/* </UserProvider> */}
+    </Provider>
   </React.StrictMode>
 );
 
