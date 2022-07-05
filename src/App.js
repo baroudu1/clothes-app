@@ -34,14 +34,14 @@ const App = () => {
       // if(user){
       //   createUserDocumentFromAuth(user);
       // }
+      // i didnt use it because i already create a doc with the user id
       dispatch(setCurrentUser(user));
     });
     return unsubscribe;
   }, [dispatch]);
 
   useEffect(() => {
-    //   addCollectionAndDocuments("categories", myList);
-
+    // addCollectionAndDocuments("categories", myList);
     getCategoriesCollections("categories").then((collections) => {
       dispatch(setCategories(collections));
     });

@@ -1,6 +1,10 @@
-import React , {useContext} from "react";
+import React from "react";
 
-import { CartContext } from "../../contexts/cart.context";
+// import { CartContext } from "../../contexts/cart.context";
+
+import { useDispatch } from "react-redux";
+
+import { setAddItemToCart } from "../../store/cart/cart.actions";
 
 
 import "./product-card.style.scss";
@@ -10,9 +14,11 @@ const Button = React.lazy(() =>
 );
 
 const ProductCard = ({ product }) => {
-  const { addItemToCart } = useContext(CartContext);
+  const dispatch = useDispatch();
+
+  // const { addItemToCart } = useContext(CartContext);
   const handleAddToCart = () => {
-    addItemToCart({...product , quantity: 1});
+    dispatch(setAddItemToCart({...product , quantity: 1}));
   }
 
   const { name, price, imageUrl } = product;

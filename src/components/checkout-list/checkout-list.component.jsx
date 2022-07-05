@@ -1,6 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
-import { CartContext } from "../../contexts/cart.context";
+import {
+  selectCartItems,
+  selectCartTotal,
+} from "../../store/cart/cart.selector";
+
+// import { CartContext } from "../../contexts/cart.context";
 
 import "./checkout-list.style.scss";
 
@@ -9,7 +15,9 @@ const CheckoutItem = React.lazy(() =>
 );
 
 const CheckoutList = () => {
-  const { cartItems , cartTotal  } = useContext(CartContext);
+  // const { cartItems , cartTotal  } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
+  const cartTotal = useSelector(selectCartTotal);
   return (
     <div className="checkout-container">
       <div className="checkout-header">
@@ -33,9 +41,7 @@ const CheckoutList = () => {
         cartItems.map((item) => <CheckoutItem key={item.id} cartItem={item} />)}
 
       <div className="total">
-        <span>
-          TOTAL: ${cartTotal}
-        </span>
+        <span>TOTAL: ${cartTotal}</span>
       </div>
     </div>
   );

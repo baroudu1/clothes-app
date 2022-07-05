@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 
 // import { UserProvider } from "./contexts/user.context";
-import { CartProvider } from "./contexts/cart.context";
+// import { CartProvider } from "./contexts/cart.context";
 // import { CategoriesProvider } from "./contexts/categories.context";
 
 import "./index.scss";
@@ -20,9 +20,9 @@ root.render(
     <Provider store={store}>
       {/* <UserProvider> */}
         {/* <CategoriesProvider> */}
-          <CartProvider>
+          {/* <CartProvider> */}
             <App />
-          </CartProvider>
+          {/* </CartProvider> */}
         {/* </CategoriesProvider> */}
       {/* </UserProvider> */}
     </Provider>

@@ -1,12 +1,18 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import {
+  selectIsCartOpen,
+  selectCartCount,
+} from "../../store/cart/cart.selector";
+
+import { setIsCartOpen } from "../../store/cart/cart.actions";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 // import { UserContext } from "../../contexts/user.context";
-import { CartContext } from "../../contexts/cart.context";
+// import { CartContext } from "../../contexts/cart.context";
 
 import { ReactComponent as MrbooLogo } from "../../assets/logo/mrboo-logo.svg";
 
@@ -21,13 +27,19 @@ const CartDropdown = React.lazy(() =>
 );
 
 const Navigation = () => {
-  const  currentUser  = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
+  const isCartOpen = useSelector(selectIsCartOpen);
+  const cartItemsCount = useSelector(selectCartCount);
   // const { currentUser } = useContext(UserContext);
-  const { isCartOpen, cartItemsCount } = useContext(CartContext);
+  // const { isCartOpen, cartItemsCount } = useContext(CartContext);
 
   const handleSignOut = async () => {
     await signOutUser();
     // setCurrentUser(null);
+  };
+  const handleCartToggle = () => {
+    dispatch(setIsCartOpen(!isCartOpen));
   };
 
   return (
@@ -54,7 +66,7 @@ const Navigation = () => {
             </Link>
           )}
           <Link to="#" className="nav-link">
-            <CartIcon count={cartItemsCount} />
+            <CartIcon count={cartItemsCount} handelClick={handleCartToggle} />
           </Link>
           {isCartOpen && <CartDropdown />}
         </div>
