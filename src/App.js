@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import {
   onAuthStateChangedListner,
@@ -48,7 +48,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Suspense fallback={<div className="loading">Loading...</div>}>
         <Routes>
           <Route path="/" element={<Navigation />}>
@@ -62,7 +62,7 @@ const App = () => {
           </Route>
         </Routes>
       </Suspense>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

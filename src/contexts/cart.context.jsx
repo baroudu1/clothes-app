@@ -2,11 +2,11 @@ import { useState, createContext, useEffect } from "react";
 
 export const CartContext = createContext({
   isCartOpen: false,
-  setIsCartOpen: () => {},
+  setIsCartOpen: () => { },
   cartItems: [],
-  addItemToCart: () => {},
-  removeItemFromCart: () => {},
-  deleteItemFromCart: () => {},
+  addItemToCart: () => { },
+  removeItemFromCart: () => { },
+  deleteItemFromCart: () => { },
 });
 
 const addItemToCartHelper = (cartItems, cartItemToAdd) => {

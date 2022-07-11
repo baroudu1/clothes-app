@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { PersistGate } from "redux-persist/integration/react";
 
 import { Provider } from "react-redux";
-import { store } from "./store/store";
+import { store, persistor } from "./store/store";
 
 // import { UserProvider } from "./contexts/user.context";
 // import { CartProvider } from "./contexts/cart.context";
@@ -18,13 +19,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <UserProvider> */}
+      <PersistGate loading={null} persistor={persistor}>
+        {/* <UserProvider> */}
         {/* <CategoriesProvider> */}
-          {/* <CartProvider> */}
-            <App />
-          {/* </CartProvider> */}
+        {/* <CartProvider> */}
+        <App />
+        {/* </CartProvider> */}
         {/* </CategoriesProvider> */}
-      {/* </UserProvider> */}
+        {/* </UserProvider> */}
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

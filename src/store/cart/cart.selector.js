@@ -13,10 +13,22 @@ export const selectCartItems = createSelector(
 );
 
 export const selectCartCount = createSelector(
-  [selectCartReducer],
-  (cart) => cart.cartCount
+  [selectCartItems],
+  (cartItems) => {
+    return cartItems.reduce(
+      (accumalatedQuantity, cartItem) =>
+        accumalatedQuantity + cartItem.quantity,
+      0
+    );
+  }
 );
 export const selectCartTotal = createSelector(
-  [selectCartReducer],
-  (cart) => cart.cartTotal
+  [selectCartItems],
+  (cartItems) => {
+    return cartItems.reduce(
+      (accumalatedQuantity, cartItem) =>
+        accumalatedQuantity + cartItem.quantity * cartItem.price,
+      0
+    );
+  }
 );
