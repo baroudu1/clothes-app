@@ -18,6 +18,7 @@ import {
   writeBatch,
   getDocs,
   query,
+  enableIndexedDbPersistence,
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -46,6 +47,20 @@ export const signInWithGoogleRedirect = () =>
 
 const db = getFirestore();
 
+//////////////////////////////////
+enableIndexedDbPersistence(db).catch((err) => {
+  if (err.code === "failed-precondition") {
+    // Multiple tabs open, persistence can only be enabled
+    // in one tab at a a time.
+    // ...
+  } else if (err.code === "unimplemented") {
+    // The current browser does not support all of the
+    // features required to enable persistence
+    // ...
+  }
+});
+//////////////////////////////////
+
 export const addCollectionAndDocuments = async (
   collectionKey,
   objectsToAdd
@@ -63,12 +78,12 @@ export const addCollectionAndDocuments = async (
 export const getCategoriesCollections = async (collectionKey) => {
   const collectionRef = collection(db, collectionKey);
   const q = query(collectionRef);
-  const snapshot = await getDocs(q);
 
+  // await Promise.reject(new Error("new Error wops"));
+  const snapshot = await getDocs(q);
   return snapshot.docs.map((doc) => {
     return { ...doc.data(), id: doc.id };
   });
-
 };
 
 export const createUserDocumentFromAuth = async (
@@ -98,7 +113,7 @@ export const createUserDocumentFromAuth = async (
       console.error("Error creating the user", error.message);
     }
   }
-  return userDocRef;
+  return userDocSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -117,4 +132,17 @@ export const signOutUser = async () => {
 
 export const onAuthStateChangedListner = (callback) => {
   return onAuthStateChanged(auth, callback);
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };

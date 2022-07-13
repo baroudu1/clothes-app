@@ -1,21 +1,27 @@
-// import { useContext } from "react";
+import React from "react";
 // import { CategoriesContext } from "../../contexts/categories.context";
 
 import { useSelector } from "react-redux";
-import { selectCategories } from "../../store/categories/categories.selector";
+import { selectCategories, selectIsLoading } from "../../store/categories/categories.selector";
 
-import Category from "../category-item/category.component";
-
+// import Category from "../category-item/category.component";
 import "./categories.style.scss";
 
+const Category = React.lazy(() => import("../category-item/category.component"));
+const Spinner = React.lazy(() => import("../spinner/spinner.component"));
+
 const Categories = () => {
-  const  categories  = useSelector(selectCategories);
+  const categories = useSelector(selectCategories);
+  const is_loading = useSelector(selectIsLoading);
 
   return (
     <div className="categories-container">
-      {categories.map((category) => (
-        <Category key={category.id} category={category} />
-      ))}
+      {is_loading ? (
+        <Spinner />
+      ) : (
+        categories.map((category) => (
+          <Category key={category.id} category={category} />
+        )))}
     </div>
   );
 };

@@ -1,7 +1,5 @@
 import {useNavigate} from 'react-router-dom';
 
-
-
 import './category.style.scss';
 
 const Category = ({ category }) => {

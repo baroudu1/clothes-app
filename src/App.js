@@ -1,15 +1,19 @@
 import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import {
-  onAuthStateChangedListner,
-  getCategoriesCollections,
-} from "./utils/firebase/firebase.utils";
+// import {
+//   getCurrentUser,
+//   // onAuthStateChangedListner,
+//   // getCategoriesCollections,
+// } from "./utils/firebase/firebase.utils";
 
-import { setCurrentUser } from "./store/user/user.actions";
-import { setCategories } from "./store/categories/categories.actions";
+// import { setCurrentUser } from "./store/user/user.actions";
+import { fetchCategoriesStart } from "./store/categories/categories.actions";
+import { setCheckUserSession } from "./store/user/user.actions";
 
 import { useDispatch } from "react-redux";
+
+import Spinner from "./components/spinner/spinner.component";
 
 // Routes
 const Home = React.lazy(() => import("./routes/home/home.page"));
@@ -30,26 +34,29 @@ const CategoryPage = React.lazy(() =>
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListner((user) => {
-      // if(user){
-      //   createUserDocumentFromAuth(user);
-      // }
-      // i didnt use it because i already create a doc with the user id
-      dispatch(setCurrentUser(user));
-    });
-    return unsubscribe;
+    // onAuthStateChangedListner((user) => {
+    //   // if(user){
+    //   //   createUserDocumentFromAuth(user);
+    //   // }
+    //   // i didnt use it because i already create a doc with the user id
+    //   dispatch(setCurrentUser(user));
+    // });
+
+      // getCurrentUser().then((user) => {
+      //   // dispatch(setCurrentUser(user));
+      //   console.log(user);
+      // });
+    dispatch(setCheckUserSession());
   }, [dispatch]);
 
   useEffect(() => {
-    // addCollectionAndDocuments("categories", myList);
-    getCategoriesCollections("categories").then((collections) => {
-      dispatch(setCategories(collections));
-    });
+    // console.log("fetching categories");
+    dispatch(fetchCategoriesStart());
   }, [dispatch]);
 
   return (
     <BrowserRouter>
-      <Suspense fallback={<div className="loading">Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<Navigation />}>
             <Route index element={<Home />} />

@@ -10,7 +10,9 @@ import {
 
 import { setIsCartOpen } from "../../store/cart/cart.actions";
 
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { setSignOutStart } from "../../store/user/user.actions";
+
+// import { signOutUser } from "../../utils/firebase/firebase.utils";
 // import { UserContext } from "../../contexts/user.context";
 // import { CartContext } from "../../contexts/cart.context";
 
@@ -35,7 +37,7 @@ const Navigation = () => {
   // const { isCartOpen, cartItemsCount } = useContext(CartContext);
 
   const handleSignOut = async () => {
-    await signOutUser();
+    dispatch(setSignOutStart())
     // setCurrentUser(null);
   };
   const handleCartToggle = () => {

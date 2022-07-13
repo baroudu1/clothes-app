@@ -8,18 +8,19 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store/store";
 
+import Spinner from "./components/spinner/spinner.component";
+
 // import { UserProvider } from "./contexts/user.context";
 // import { CartProvider } from "./contexts/cart.context";
 // import { CategoriesProvider } from "./contexts/categories.context";
 
 import "./index.scss";
-import "./app.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<Spinner />} persistor={persistor}>
         {/* <UserProvider> */}
         {/* <CategoriesProvider> */}
         {/* <CartProvider> */}

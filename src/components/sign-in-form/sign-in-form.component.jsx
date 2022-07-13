@@ -1,17 +1,29 @@
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
 // import { UserContext } from "../../contexts/user.contexts";
 
-import "./sign-in-form.style.scss";
+import { useSelector } from "react-redux/es/exports";
+
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 import {
-  // auth,
-  signInWithGooglePopup,
-  // signInWithGoogleRedirect,
-  signInEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+  setEmailSignInStart,
+  setGoogleSignInStart,
+} from "../../store/user/user.actions";
+
+// import {
+//   // auth,
+//   signInWithGooglePopup,
+//   // signInWithGoogleRedirect,
+//   signInEmailAndPassword,
+//   createUserDocumentFromAuth,
+// } from "../../utils/firebase/firebase.utils";
+
+import "./sign-in-form.style.scss";
+import { async } from "@firebase/util";
 
 const FormInput = React.lazy(() =>
   import("../../components/form-input/form-input.component")
@@ -30,6 +42,8 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
 
   // const { setCurrentUser } = useContext(UserContext);
 
@@ -43,41 +57,53 @@ const SignInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(formFields);
-    try {
-      await signInEmailAndPassword(email, password);
-      // console.log(user);
-      // setCurrentUser(user);
-      // Swal.fire({
-      //   icon: "success",
-      //   title: "Success",
-      //   text: "You have logged successfully",
-      // });
-      navigate("/");
-      restformFields();
 
-    } catch (error) {
-      let errorMsg =
-        error.message.split(":")[1].replace("auth/", "").replaceAll("-", " ");
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: errorMsg,
-      });
-      return;
+    dispatch(setEmailSignInStart(email, password));
+
+    if (currentUser) {
+      restformFields();
+      navigate("/");
     }
+
+    // dispatch(setEmailSignInStart(email, password));
+    // console.log(test);
+    // dispatch(setCheckUserSession());
+
+    //   try {
+    //     // await signInEmailAndPassword(email, password);
+    //     // console.log(user);
+    //     // setCurrentUser(user);
+    //     // Swal.fire({
+    //     //   icon: "success",
+    //     //   title: "Success",
+    //     //   text: "You have logged successfully",
+    //     // });
+    //   } catch (error) {
+    //     let errorMsg = error.message
+    //       .split(":")[1]
+    //       .replace("auth/", "")
+    //       .replaceAll("-", " ");
+    //     Swal.fire({
+    //       icon: "error",
+    //       title: "Oops...",
+    //       text: errorMsg,
+    //     });
+    //     return;
+    //   }
   };
 
   const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    // console.log(user)
-    // setCurrentUser(user);
-    // Swal.fire({
-    //   icon: "success",
-    //   title: "Success",
-    //   text: "You have logged successfully",
-    // });
-    navigate("/");
-    await createUserDocumentFromAuth(user);
+    // const { user } = await signInWithGooglePopup();
+    // // console.log(user)
+    // // setCurrentUser(user);
+    // // Swal.fire({
+    // //   icon: "success",
+    // //   title: "Success",
+    // //   text: "You have logged successfully",
+    // // });
+    // navigate("/");
+    // await createUserDocumentFromAuth(user);
+    dispatch(setGoogleSignInStart());
   };
 
   return (
