@@ -9,7 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // import { setCurrentUser } from "./store/user/user.actions";
 import { fetchCategoriesStart } from "./store/categories/categories.actions";
-import { setCheckUserSession } from "./store/user/user.actions";
+// import { setCheckUserSession } from "./store/user/user.actions";
 
 import { useDispatch } from "react-redux";
 
@@ -33,21 +33,21 @@ const CategoryPage = React.lazy(() =>
 //
 const App = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    // onAuthStateChangedListner((user) => {
-    //   // if(user){
-    //   //   createUserDocumentFromAuth(user);
-    //   // }
-    //   // i didnt use it because i already create a doc with the user id
-    //   dispatch(setCurrentUser(user));
-    // });
+  // useEffect(() => {
+  //   // onAuthStateChangedListner((user) => {
+  //   //   // if(user){
+  //   //   //   createUserDocumentFromAuth(user);
+  //   //   // }
+  //   //   // i didnt use it because i already create a doc with the user id
+  //   //   dispatch(setCurrentUser(user));
+  //   // });
 
-      // getCurrentUser().then((user) => {
-      //   // dispatch(setCurrentUser(user));
-      //   console.log(user);
-      // });
-    dispatch(setCheckUserSession());
-  }, [dispatch]);
+  //     // getCurrentUser().then((user) => {
+  //     //   // dispatch(setCurrentUser(user));
+  //     //   console.log(user);
+  //     // });
+  //   dispatch(setCheckUserSession());
+  // }, [dispatch]);
 
   useEffect(() => {
     // console.log("fetching categories");

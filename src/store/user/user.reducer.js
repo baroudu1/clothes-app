@@ -14,8 +14,14 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         is_loading: true,
       };
-    case USER_ACTIONS_TYPES.GOOGLE_SIGN_IN_START ||
-      USER_ACTIONS_TYPES.EMAIL_SIGN_IN_START:
+    case USER_ACTIONS_TYPES.GOOGLE_SIGN_IN_START:
+      console.log("sign in start");
+      return {
+        ...state,
+        is_loading: true,
+        error: null,
+      };
+    case USER_ACTIONS_TYPES.EMAIL_SIGN_IN_START:
       console.log("sign in start");
       return {
         ...state,

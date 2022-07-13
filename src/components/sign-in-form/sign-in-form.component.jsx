@@ -23,7 +23,6 @@ import {
 // } from "../../utils/firebase/firebase.utils";
 
 import "./sign-in-form.style.scss";
-import { async } from "@firebase/util";
 
 const FormInput = React.lazy(() =>
   import("../../components/form-input/form-input.component")
