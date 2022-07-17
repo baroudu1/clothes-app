@@ -6,6 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { Provider } from "react-redux";
+
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePromise } from "./utils/stripe/stripe.utils";
+
 import { store, persistor } from "./store/store";
 
 import Spinner from "./components/spinner/spinner.component";
@@ -24,7 +28,9 @@ root.render(
         {/* <UserProvider> */}
         {/* <CategoriesProvider> */}
         {/* <CartProvider> */}
-        <App />
+        <Elements stripe={stripePromise}>
+          <App />
+        </Elements>
         {/* </CartProvider> */}
         {/* </CategoriesProvider> */}
         {/* </UserProvider> */}

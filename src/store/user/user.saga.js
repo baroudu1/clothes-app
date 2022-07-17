@@ -3,8 +3,6 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 
 import { USER_ACTIONS_TYPES } from "./user.types";
 
-
-
 /////////////////////////////////// put -> dispatch //  call : create effect description , call promise    /////////////////////////////////////////////
 
 import {
@@ -19,6 +17,7 @@ import {
   signOutUser,
   signInWithGooglePopup,
   // signInWithGoogleRedirect,
+  createAuthUserWithEmailAndPassword,
   getCurrentUser,
   signInEmailAndPassword,
   createUserDocumentFromAuth,
@@ -46,7 +45,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
       userAuth,
       additionalData
     );
-    // console.log(userSnapshot.data());
+    // console.log(userSnapshot);
     yield put(
       setSignInSuccess({ id: userSnapshot.id, ...userSnapshot.data() })
     );
@@ -97,6 +96,25 @@ export function* signOut() {
   }
 }
 
+export function* signUp({ payload: { email, password, displayName } }) {
+  try {
+    const { user } = yield call(
+      createAuthUserWithEmailAndPassword,
+      email,
+      password
+    );
+    console.log(user);
+
+    yield call(getSnapshotFromUserAuth, user, { displayName });
+    yield call(()=>{
+      window.location.reload(false)
+    })
+  } catch (error) {
+    yield call(errorFunction, error);
+    yield put(setSignInFailure(error));
+  }
+}
+
 export function* onEmailSignInStart() {
   yield takeLatest(
     USER_ACTIONS_TYPES.EMAIL_SIGN_IN_START,
@@ -112,11 +130,16 @@ export function* onSignOutStart() {
   yield takeLatest(USER_ACTIONS_TYPES.SIGN_OUT_START, signOut);
 }
 
+export function* onSignUpStart() {
+  yield takeLatest(USER_ACTIONS_TYPES.SIGN_UP_START, signUp);
+}
+
 export function* userSaga() {
   yield all([
     call(onCkeckUserSession),
     call(onEmailSignInStart),
     call(onSignInWithGoogleStart),
     call(onSignOutStart),
+    call(onSignUpStart),
   ]);
 }

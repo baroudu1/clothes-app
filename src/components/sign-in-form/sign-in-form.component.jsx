@@ -1,13 +1,13 @@
 // import Swal from "sweetalert2";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 // import { UserContext } from "../../contexts/user.contexts";
 
-import { useSelector } from "react-redux/es/exports";
+// import { useSelector } from "react-redux/es/exports";
 
-import { selectCurrentUser } from "../../store/user/user.selector";
+// import { selectCurrentUser } from "../../store/user/user.selector";
 
 import {
   setEmailSignInStart,
@@ -40,9 +40,9 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector(selectCurrentUser);
+  // const currentUser = useSelector(selectCurrentUser);
 
   // const { setCurrentUser } = useContext(UserContext);
 
@@ -59,10 +59,11 @@ const SignInForm = () => {
 
     dispatch(setEmailSignInStart(email, password));
 
-    if (currentUser) {
-      restformFields();
-      navigate("/");
-    }
+    // restformFields();
+
+    // if (currentUser) {
+    //   navigate("/");
+    // }
 
     // dispatch(setEmailSignInStart(email, password));
     // console.log(test);

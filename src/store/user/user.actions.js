@@ -24,4 +24,6 @@ export const setSignInFailure = (error) => {
 export const setSignOutStart = () => {
   return createAction(USER_ACTIONS_TYPES.SIGN_OUT_START);
 }
-
+export const setSignUpStart = (email , password , displayName) => {
+  return createAction(USER_ACTIONS_TYPES.SIGN_UP_START , {email , password , displayName});
+}

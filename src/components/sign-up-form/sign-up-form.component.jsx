@@ -2,12 +2,18 @@ import Swal from "sweetalert2";
 
 import React, { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+
+// import {
+//   createAuthUserWithEmailAndPassword,
+//   createUserDocumentFromAuth,
+// } from "../../utils/firebase/firebase.utils";
+
+import { useDispatch } from "react-redux";
 
 import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+  setSignUpStart,
+} from "../../store/user/user.actions";
 
 // import { UserContext } from "../../contexts/user.context";
 
@@ -31,7 +37,9 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   // const { setCurrentUser } = useContext(UserContext);
 
@@ -55,35 +63,37 @@ const SignUpForm = () => {
       });
       return;
     }
-    try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      //   console.log(user);
-      // setCurrentUser(user);
 
-      // Swal.fire({
-      //   icon: "success",
-      //   title: "Success",
-      //   text: "User created successfully",
-      // });
-      navigate("/");
-      restformFields();
-      await createUserDocumentFromAuth(user, {
-        displayName,
-      });
-    } catch (error) {
-      let errorMsg = error.message
-        .split(":")[1]
-        .replace("auth/", "")
-        .replaceAll("-", " ");
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: errorMsg,
-      });
-    }
+    dispatch(setSignUpStart(email,password,displayName))
+    // try {
+    //   const { user } = await createAuthUserWithEmailAndPassword(
+    //     email,
+    //     password
+    //   );
+    //   //   console.log(user);
+    //   // setCurrentUser(user);
+
+    //   // Swal.fire({
+    //   //   icon: "success",
+    //   //   title: "Success",
+    //   //   text: "User created successfully",
+    //   // });
+    //   navigate("/");
+    //   restformFields();
+    //   await createUserDocumentFromAuth(user, {
+    //     displayName,
+    //   });
+    // } catch (error) {
+    //   let errorMsg = error.message
+    //     .split(":")[1]
+    //     .replace("auth/", "")
+    //     .replaceAll("-", " ");
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: errorMsg,
+    //   });
+    // }
   };
 
   return (

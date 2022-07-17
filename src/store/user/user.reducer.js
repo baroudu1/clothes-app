@@ -48,7 +48,12 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...INITIAL_STATE,
       };
-
+    case USER_ACTIONS_TYPES.SIGN_UP_START:
+      return {
+        currentUser: null,
+        error: null,
+        is_loading: true,
+      };
     default:
       return state;
   }
