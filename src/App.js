@@ -15,6 +15,23 @@ import { useDispatch } from "react-redux";
 
 import Spinner from "./components/spinner/spinner.component";
 
+
+// import { gql, useQuery } from "@apollo/client";
+// const GET_CATEGORIES = gql`
+//   query categories {
+//     collections {
+//       id
+//       title
+//       items {
+//         id
+//         name
+//         price
+//         imageUrl
+//       }
+//     }
+//   }
+// `;
+
 // Routes
 const Home = React.lazy(() => import("./routes/home/home.page"));
 const Navigation = React.lazy(() =>
@@ -53,6 +70,11 @@ const App = () => {
     // console.log("fetching categories");
     dispatch(fetchCategoriesStart());
   }, [dispatch]);
+
+  // const   {loading ,data}  = useQuery(GET_CATEGORIES);
+  // console.log("loading", loading);
+  // console.log("data", data);
+
 
   return (
     <BrowserRouter>

@@ -1,5 +1,5 @@
 // import Swal from "sweetalert2";
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 // import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
@@ -37,7 +37,7 @@ const defaultFormFields = {
   password: "",
 };
 
-const SignInForm = () => {
+const SignInForm = memo(() => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
   // const navigate = useNavigate();
@@ -136,5 +136,5 @@ const SignInForm = () => {
       </form>
     </div>
   );
-};
+});
 export default SignInForm;

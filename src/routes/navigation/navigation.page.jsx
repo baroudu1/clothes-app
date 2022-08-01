@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
+import React, { Fragment, memo } from "react";
 import { Outlet, Link } from "react-router-dom";
 
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import {
   selectIsCartOpen,
@@ -28,7 +28,7 @@ const CartDropdown = React.lazy(() =>
   import("../../components/cart-dropdown/cart-dropdown.component")
 );
 
-const Navigation = () => {
+const Navigation = memo(() => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
@@ -37,7 +37,7 @@ const Navigation = () => {
   // const { isCartOpen, cartItemsCount } = useContext(CartContext);
 
   const handleSignOut = async () => {
-    dispatch(setSignOutStart())
+    dispatch(setSignOutStart());
     // setCurrentUser(null);
   };
   const handleCartToggle = () => {
@@ -76,5 +76,5 @@ const Navigation = () => {
       <Outlet />
     </Fragment>
   );
-};
+});
 export default Navigation;

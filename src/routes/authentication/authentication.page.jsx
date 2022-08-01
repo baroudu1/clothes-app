@@ -1,11 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 // import { useEffect } from "react";
 // import { getRedirectResult } from "firebase/auth";
 
-
-
-
-import './authentication.style.scss';
+import "./authentication.style.scss";
 
 // import {
 //   // auth,
@@ -23,8 +20,7 @@ const SignInForm = React.lazy(() =>
   import("../../components/sign-in-form/sign-in-form.component")
 );
 
-
-const Authentication = () => {
+const Authentication = memo(() => {
   // useEffect(() => {
   //   async function fetchData() {
   //     // You can await here
@@ -59,5 +55,5 @@ const Authentication = () => {
       <SignUpForm />
     </div>
   );
-};
+});
 export default Authentication;

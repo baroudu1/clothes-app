@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -11,9 +11,7 @@ import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
 
-import {
-  setSignUpStart,
-} from "../../store/user/user.actions";
+import { setSignUpStart } from "../../store/user/user.actions";
 
 // import { UserContext } from "../../contexts/user.context";
 
@@ -34,12 +32,11 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 
-const SignUpForm = () => {
+const SignUpForm = memo(() => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
   // const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   // const { setCurrentUser } = useContext(UserContext);
 
@@ -64,7 +61,7 @@ const SignUpForm = () => {
       return;
     }
 
-    dispatch(setSignUpStart(email,password,displayName))
+    dispatch(setSignUpStart(email, password, displayName));
     // try {
     //   const { user } = await createAuthUserWithEmailAndPassword(
     //     email,
@@ -141,5 +138,5 @@ const SignUpForm = () => {
       </form>
     </div>
   );
-};
+});
 export default SignUpForm;

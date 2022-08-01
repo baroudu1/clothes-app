@@ -11,8 +11,11 @@ export const setCheckUserSession = () => {
 export const setGoogleSignInStart = () => {
   return createAction(USER_ACTIONS_TYPES.GOOGLE_SIGN_IN_START);
 };
-export const setEmailSignInStart = (email , password) => {
-  return createAction(USER_ACTIONS_TYPES.EMAIL_SIGN_IN_START , {email , password});
+export const setEmailSignInStart = (email, password) => {
+  return createAction(USER_ACTIONS_TYPES.EMAIL_SIGN_IN_START, {
+    email,
+    password,
+  });
 };
 export const setSignInSuccess = (user) => {
   return createAction(USER_ACTIONS_TYPES.SIGN_IN_SUCCESS, user);
@@ -23,7 +26,11 @@ export const setSignInFailure = (error) => {
 
 export const setSignOutStart = () => {
   return createAction(USER_ACTIONS_TYPES.SIGN_OUT_START);
-}
-export const setSignUpStart = (email , password , displayName) => {
-  return createAction(USER_ACTIONS_TYPES.SIGN_UP_START , {email , password , displayName});
-}
+};
+export const setSignUpStart = (email, password, displayName) => {
+  return createAction(USER_ACTIONS_TYPES.SIGN_UP_START, {
+    email,
+    password,
+    displayName,
+  });
+};

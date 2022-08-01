@@ -1,13 +1,13 @@
 // import { useContext } from "react";
 // import { CartContext } from "../../contexts/cart.context";
+import { memo } from "react";
 
 import { ReactComponent as BagIcon } from "../../assets/icons/bag.svg";
 
 import "./cart-icon.style.scss";
 
-const CartIcon = ({ count  , handelClick}) => {
+const CartIcon = memo(({ count, handelClick }) => {
   // const { isCartOpen, setIsCartOpen } = useContext(CartContext);
- 
 
   return (
     <div onClick={handelClick} className="cart-icon-container">
@@ -15,5 +15,5 @@ const CartIcon = ({ count  , handelClick}) => {
       <span className="item-count">{count}</span>
     </div>
   );
-};
+});
 export default CartIcon;

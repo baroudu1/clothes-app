@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 
 // import { CategoriesContext } from "../../contexts/categories.context";\\
@@ -16,7 +16,7 @@ const ProductCard = React.lazy(() =>
 );
 const Spinner = React.lazy(() => import("../spinner/spinner.component"));
 
-const ProductsList = () => {
+const ProductsList = memo(() => {
   const categories = useSelector(selectCategories);
   const is_loading = useSelector(selectIsLoading);
 
@@ -40,5 +40,5 @@ const ProductsList = () => {
       )}
     </div>
   );
-};
+});
 export default ProductsList;

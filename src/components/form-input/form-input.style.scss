@@ -11,6 +11,12 @@ $main-color: black;
   position: relative;
   margin: 45px 0;
 
+  @media screen and (max-width: 800px) {
+
+    margin: 20px 20px 20px 0px;
+
+  }
+
   .form-input {
     background: none;
     background-color: white;
@@ -28,7 +34,7 @@ $main-color: black;
       outline: none;
     }
 
-    &:focus ~ .form-input-label {
+    &:focus~.form-input-label {
       @include shrinkLabel();
     }
   }

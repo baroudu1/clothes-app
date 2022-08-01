@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { useCallback, memo } from "react";
 import { useNavigate } from "react-router-dom";
 
 // import { CartContext } from "../../contexts/cart.context";
@@ -15,13 +15,31 @@ const CartItem = React.lazy(() =>
   import("../../components/cart-item/cart-item.component")
 );
 
-const CartDropdown = () => {
+// const sleep = (ms) => {
+//   var start = new Date().getTime();
+//   for (var i = 0; i < 1e7; i++) {
+//     if (new Date().getTime() - start > ms) {
+//       break;
+//     }
+//   }
+// };
+
+const CartDropdown = memo(() => {
+  // const [count, setCount] = useState(100);
+
+  // const handredCount = useMemo(() => {
+  //   console.log("start");
+  //   sleep(2000);
+  //   console.log("end");
+  //   return count;
+  // }, [count]);
+
   // const { cartItems } = useContext(CartContext);
   const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
-  const handleCheckout = () => {
+  const handleCheckout = useCallback(() => {
     navigate("/checkout");
-  };
+  }, [navigate]);
 
   return (
     <div className="cart-dropdown-container">
@@ -35,5 +53,5 @@ const CartDropdown = () => {
       <Button onClick={handleCheckout}>Checkout</Button>
     </div>
   );
-};
+});
 export default CartDropdown;

@@ -1,4 +1,4 @@
-// import { useContext } from "react";
+import { memo } from "react";
 
 // import { CartContext } from "../../contexts/cart.context";
 
@@ -7,7 +7,7 @@ import { setRemoveItemFromCart } from "../../store/cart/cart.actions";
 
 import "./cart-item.style.scss";
 
-const CartItem = ({ cartItem }) => {
+const CartItem = memo(({ cartItem }) => {
   const dispatch = useDispatch();
   const { name, imageUrl = "", price, quantity } = cartItem;
   // const { removeItemFromCart } = useContext(CartContext);
@@ -31,5 +31,5 @@ const CartItem = ({ cartItem }) => {
       </div>
     </div>
   );
-};
+});
 export default CartItem;

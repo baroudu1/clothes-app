@@ -1,6 +1,7 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { getCategoriesCollections } from "../../utils/firebase/firebase.utils";
 
+
 import {
   fetchCategoriesSuccess,
   fetchCategoriesFailure,
@@ -16,6 +17,8 @@ export function* fetchCategoriesAsync() {
     yield put(fetchCategoriesFailure(error));
   }
 }
+
+
 
 
 

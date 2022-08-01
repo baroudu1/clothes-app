@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment, memo } from "react";
 import { useParams } from "react-router-dom";
 
 // import { CategoriesContext } from "../../contexts/categories.context";
@@ -16,7 +16,7 @@ const ProductCard = React.lazy(() =>
 );
 const Spinner = React.lazy(() => import("../spinner/spinner.component"));
 
-const CategoryPreview = () => {
+const CategoryPreview = memo(() => {
   const categories = useSelector(selectCategories);
   const is_loading = useSelector(selectIsLoading);
   const { category } = useParams();
@@ -45,5 +45,5 @@ const CategoryPreview = () => {
       )}
     </div>
   );
-};
+});
 export default CategoryPreview;

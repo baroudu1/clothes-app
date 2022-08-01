@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
@@ -11,7 +11,7 @@ import "./payment-form.style.scss";
 
 const Spinner = React.lazy(() => import("../spinner/spinner.component"));
 
-const PaymentForm = () => {
+const PaymentForm = memo(() => {
   const stripe = useStripe();
   const elements = useElements();
   const cartTotal = useSelector(selectCartTotal);
@@ -120,5 +120,5 @@ const PaymentForm = () => {
       </form>
     </div>
   );
-};
+});
 export default PaymentForm;

@@ -1,6 +1,11 @@
 .buttons-container {
   display: flex;
   justify-content: space-between;
-  
   margin-top: 20px;
+
+  @media screen and (max-width: 800px) {
+    
+    margin: 20px;
+
+  }
 }

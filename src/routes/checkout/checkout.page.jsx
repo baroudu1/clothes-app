@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./checkout.style.scss";
 
 const CheckoutList = React.lazy(() =>
@@ -9,12 +9,12 @@ const PaymentForm = React.lazy(() =>
   import("../../components/payment-form/payment-form.component")
 );
 
-const CheckOut = () => {
+const CheckOut = memo(() => {
   return (
     <div className="checkout">
       <CheckoutList />
       <PaymentForm />
     </div>
   );
-};
+});
 export default CheckOut;

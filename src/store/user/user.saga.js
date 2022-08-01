@@ -106,9 +106,9 @@ export function* signUp({ payload: { email, password, displayName } }) {
     console.log(user);
 
     yield call(getSnapshotFromUserAuth, user, { displayName });
-    yield call(()=>{
-      window.location.reload(false)
-    })
+    yield call(() => {
+      window.location.reload(false);
+    });
   } catch (error) {
     yield call(errorFunction, error);
     yield put(setSignInFailure(error));

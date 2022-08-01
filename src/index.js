@@ -12,6 +12,8 @@ import { stripePromise } from "./utils/stripe/stripe.utils";
 
 import { store, persistor } from "./store/store";
 
+// import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+
 import Spinner from "./components/spinner/spinner.component";
 
 // import { UserProvider } from "./contexts/user.context";
@@ -20,22 +22,30 @@ import Spinner from "./components/spinner/spinner.component";
 
 import "./index.scss";
 
+// const client = new ApolloClient({
+//   uri: "https://crwn-clothing.com",
+//   cache: new InMemoryCache(),
+
+// });
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={<Spinner />} persistor={persistor}>
-        {/* <UserProvider> */}
-        {/* <CategoriesProvider> */}
-        {/* <CartProvider> */}
-        <Elements stripe={stripePromise}>
-          <App />
-        </Elements>
-        {/* </CartProvider> */}
-        {/* </CategoriesProvider> */}
-        {/* </UserProvider> */}
-      </PersistGate>
-    </Provider>
+    {/* <ApolloProvider client={client}> */}
+      <Provider store={store}>
+        <PersistGate loading={<Spinner />} persistor={persistor}>
+          {/* <UserProvider> */}
+          {/* <CategoriesProvider> */}
+          {/* <CartProvider> */}
+          <Elements stripe={stripePromise}>
+            <App />
+          </Elements>
+          {/* </CartProvider> */}
+          {/* </CategoriesProvider> */}
+          {/* </UserProvider> */}
+        </PersistGate>
+      </Provider>
+    {/* </ApolloProvider> */}
   </React.StrictMode>
 );
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useSelector } from "react-redux";
 
 import {
@@ -14,7 +14,7 @@ const CheckoutItem = React.lazy(() =>
   import("../../components/checkout-item/checkout-item.component")
 );
 
-const CheckoutList = () => {
+const CheckoutList = memo(() => {
   // const { cartItems , cartTotal  } = useContext(CartContext);
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
@@ -45,5 +45,5 @@ const CheckoutList = () => {
       </div>
     </div>
   );
-};
+});
 export default CheckoutList;

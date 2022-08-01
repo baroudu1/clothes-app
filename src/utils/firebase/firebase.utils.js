@@ -75,6 +75,8 @@ export const addCollectionAndDocuments = async (
   console.log("Batch committed");
 };
 
+
+
 export const getCategoriesCollections = async (collectionKey) => {
   const collectionRef = collection(db, collectionKey);
   const q = query(collectionRef);
