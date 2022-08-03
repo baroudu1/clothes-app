@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, memo } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // import {
@@ -14,7 +14,6 @@ import { setCheckUserSession } from "./store/user/user.actions";
 import { useDispatch } from "react-redux";
 
 import Spinner from "./components/spinner/spinner.component";
-
 
 // import { gql, useQuery } from "@apollo/client";
 // const GET_CATEGORIES = gql`
@@ -48,7 +47,7 @@ const CategoryPage = React.lazy(() =>
 );
 
 //
-const App = () => {
+const App = memo(() => {
   const dispatch = useDispatch();
   useEffect(() => {
     // onAuthStateChangedListner((user) => {
@@ -75,7 +74,6 @@ const App = () => {
   // console.log("loading", loading);
   // console.log("data", data);
 
-
   return (
     <BrowserRouter>
       <Suspense fallback={<Spinner />}>
@@ -93,6 +91,6 @@ const App = () => {
       </Suspense>
     </BrowserRouter>
   );
-};
+});
 
 export default App;
