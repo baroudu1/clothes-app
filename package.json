@@ -16,7 +16,6 @@
     "@types/react-dom": "^18.0.6",
     "dotenv": "^16.0.1",
     "firebase": "^9.8.4",
-    "gh-pages": "^4.0.0",
     "graphql": "^16.5.0",
     "netlify-cli": "^10.10.0",
     "react": "^18.2.0",
@@ -32,7 +31,6 @@
     "reselect": "^4.1.6",
     "sass": "^1.53.0",
     "stripe": "^9.13.0",
-    "sw-precache": "^5.2.1",
     "sweetalert2": "^11.4.19",
     "typescript": "^4.7.4",
     "util": "^0.12.4",
@@ -41,7 +39,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "gh-pages": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -62,6 +59,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "./"
+  }
 }
